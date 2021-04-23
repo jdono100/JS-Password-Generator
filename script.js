@@ -13,7 +13,7 @@
 // Make a function for the user to specify how long and what kind of characters are to be used in the password
 function passwordFeatures() {
   // Asking how many characters they want the password to be
-  var characters = parseInt(prompt("How long would you like your password to be? The range is 8-48 characters."));
+  var characters = parseInt(prompt("How long would you like your password to be? 8-48 character range"));
   // Conditional statements for inputting password length
   if (characters < 8) {
     alert("Please provide a larger number, password requires a minimum of 8 characters.");
@@ -25,6 +25,7 @@ function passwordFeatures() {
   };
   if (isNaN(characters) === true) {
     alert("Please provide a numeral for the password generator to work correctly.");
+    return;
   };
   // Variable boolean statements for types of characters used in the password
   var includeLetters = confirm("If you would like to include letters in your password, click OK.");
@@ -45,7 +46,7 @@ function passwordFeatures() {
 };
 // Random element function to call later
 function randomizer(bank) {
-  var index = Math.floor(Math.random()*bank.length);
+  var index = Math.floor(Math.random() * bank.length);
   var randomizedBank = bank[index];
   return randomizedBank;
 };
@@ -54,34 +55,43 @@ function craftPassword() {
   var features = passwordFeatures();
   // Variable to store the password during concatenation
   var passwordText = [];
-  // Variable to store a minimum amount of each character type the user inputted
-  var minCharacters = [];
   // Variable to store the various types of characters the user inputted
   var typeCharacters = [];
+  // Variable to store a minimum amount of each character type the user inputted
+  var minCharacters = [];
   // Conditional statements that concatenate arrays and push random characters
   if (features.includeLetters) {
-    minCharacters.push(randomizer(letterBank));
-    typeCharacters = typeCharacters.concat(letterBank);
-  }
+    minCharacters = minCharacters.concat(letterBank);
+    typeCharacters.push(randomizer(letterBank));
+  };
   if (features.includeNumerals) {
-    minCharacters.push(randomizer(numberBank));
-    typeCharacters = typeCharacters.concat(numberBank);
-  }
+    minCharacters = minCharacters.concat(numberBank);
+    typeCharacters.push(randomizer(numberBank));
+  };
   if (features.includeSpeChars) {
-    minCharacters.push(randomizer(speCharBank));
-    typeCharacters = typeCharacters.concat(speCharBank);
-  }
+    minCharacters = minCharacters.concat(speCharBank);
+    typeCharacters.push(randomizer(speCharBank));
+  };
+  // Iterate the length data with a for loop once all options and concatenation has occured
+  for (var i = 0; i < features.length; i++) {
+    var typeCharacter = randomizer(typeCharacters);
+    passwordText.push(typeCharacter);
+  };
+  for (var i = 0; i < minCharacters.length; i++) {
+    passwordText[i] = minCharacters[i];
+  };
+  return passwordText.join("");
 };
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = craftPassword();
-  var passwordText = document.querySelector("#password");
+  var generatedPassword = document.querySelector("#password");
 
   
 
-  passwordText.value = password;
+  generatedPassword.value = password;
 
 }
 
