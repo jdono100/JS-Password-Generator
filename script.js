@@ -56,6 +56,8 @@ function craftPassword() {
   var passwordText = [];
   // Variable to store a minimum amount of each character type the user inputted
   var minCharacters = [];
+  // Variable to store the various types of characters the user inputted
+  var characterTypes = [];
 };
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
