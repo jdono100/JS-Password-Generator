@@ -9,7 +9,7 @@
 // Letter, Number, & Special Character Arrays
   var letterBank = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","t","u","v","w","x","y","z"];
   var numberBank = ["0","1","2","3","4","5","6","7","8","9"];
-  var spCharBank = ["!","#","$","%","&","*","?","@","-","_"];
+  var speCharBank = ["!","#","$","%","&","*","?","@","-","_"];
 // Make a function for the user to specify how long and what kind of characters are to be used in the password
 function passwordFeatures() {
   // Asking how many characters they want the password to be
@@ -57,7 +57,20 @@ function craftPassword() {
   // Variable to store a minimum amount of each character type the user inputted
   var minCharacters = [];
   // Variable to store the various types of characters the user inputted
-  var characterTypes = [];
+  var typeCharacters = [];
+  // Conditional statements that concatenate arrays and push random characters
+  if (features.includeLetters) {
+    minCharacters.push(randomizer(letterBank));
+    typeCharacters = typeCharacters.concat(letterBank);
+  }
+  if (features.includeNumerals) {
+    minCharacters.push(randomizer(numberBank));
+    typeCharacters = typeCharacters.concat(numberBank);
+  }
+  if (features.includeSpeChars) {
+    minCharacters.push(randomizer(speCharBank));
+    typeCharacters = typeCharacters.concat(speCharBank);
+  }
 };
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
