@@ -114,5 +114,14 @@ function writePassword() {
   generatedPassword.value = password;
 }
 
+// Add a button to click to copy the password once its created 
+function copyFunction() {
+  var copyPass = document.getElementById("password");
+
+  copyPass.select();
+  copyPass.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+}
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
